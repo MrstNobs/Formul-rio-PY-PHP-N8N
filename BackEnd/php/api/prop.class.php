@@ -27,7 +27,7 @@
 
                 return $stmt->fetch(PDO::FETCH_ASSOC);
             }catch(PDOException $e){
-                die("Erro na captura: " . $e->getMessage());
+                error_log("Erro na captura: " . $e->getMessage());
             }
         }
 
@@ -37,12 +37,14 @@
                 $sql = "UPDATE Proprietario SET senha = :senha WHERE email = :email";
                 $stmt = $pdo->prepare($sql);
 
-                $stmt->bindParam(':senha', $senha);
+                $hash = password_hash($senha, PASSWORD_DEFAULT);
+
+                $stmt->bindParam(':senha', $hash);
                 $stmt->bindParam(':email', $email);
 
                 $stmt->execute();
             }catch(PDOException $e){
-                die("Error na Atualização: " . $e->getMessage());
+                error_log("Error na Atualização: " . $e->getMessage());
             }
         }
 
@@ -56,7 +58,7 @@
 
                 $stmt->execute();
             }catch(PDOException $e){
-                die("Erro na DELETAR: " . $e->getMessage());
+                error_log("Erro na DELETAR: " . $e->getMessage());
             }
         }
     }

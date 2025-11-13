@@ -13,7 +13,11 @@ const Login = () => {
     e.preventDefault();
 
     // Cria um Objeto
-    const data = [email_login, senha_login];
+    const data = {
+      action: 'login',
+      email_login, 
+      senha_login
+    };
 
     try{
       // Faz uma reqsuisiçaõ

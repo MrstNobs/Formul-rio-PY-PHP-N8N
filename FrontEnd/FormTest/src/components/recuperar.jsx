@@ -15,7 +15,7 @@ const Recuperar = () => {
         try{
             const URL = import.meta.env.VITE_PY_UPDATE;
             const requisicao = await fetch(URL, {
-                method: 'POST',
+                method: 'PUT',
                 headers: {'content-type': 'application/json'},
                 body: JSON.stringify(data)
             });

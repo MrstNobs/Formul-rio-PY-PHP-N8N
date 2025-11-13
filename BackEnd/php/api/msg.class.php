@@ -3,7 +3,9 @@
         public function Create($email_prop, $email_dstny, $nome_dstny, $msg_dstny){
             try{
                 $pdo = Conn::getConn();
-                $sql = "INSERT INTO Mensagens VALUES (:email_prop, :email_dstny, :nome_dstny, :msg_dstny)";
+                $sql = "INSERT INTO Mensagens (email_prop, email_dstny, nome_dstny, msg_dstny) 
+                        VALUES (:email_prop, :email_dstny, :nome_dstny, :msg_dstny)"
+                ;
                 $stmt = $pdo->prepare($sql);
 
                 $stmt->bindParam(':email_prop', $email_prop);
@@ -27,7 +29,7 @@
 
                 $stmt->execute();
 
-                return $stmt->fetch(PDO::FETCH_ASSOC);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
             }catch(PDOException $e){
                 die("Erro na Captura: " . $e->getMessage());
             }

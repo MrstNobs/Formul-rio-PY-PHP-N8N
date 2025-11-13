@@ -11,7 +11,11 @@ const Cadastro = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = {email_cadastro, senha_cadastro};
+    const data = {
+      action:'cadastro',
+      email_cadastro, 
+      senha_cadastro
+    };
 
     try{
       // Monta uma reuisição em JSON para o Pyhton
