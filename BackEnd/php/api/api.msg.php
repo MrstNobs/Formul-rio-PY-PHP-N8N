@@ -1,6 +1,6 @@
 <?php 
-    require 'conn.class.php';
-    require 'msg.class.php';
+    require './class/conn.class.php';
+    require './class/msg.class.php';
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         header('Content-Type: application/json');
@@ -21,6 +21,38 @@
             $user->Create($email_prop, $email_dstny, $nome_dstny, $msg_dstny);
 
             echo json_encode(['success'=>true, 'message'=>'Mensagem Enviada!']);
+        }catch(PDOException $e){
+            echo json_encode(['error'=> $e->getMessage()]);
+        }
+    }
+
+    if($_SERVER['REQUEST_METHOD'] === 'GET'){
+        header('Content-Type: application/json');
+        // $data = json_decode(file_get_contents('php://input'), true);
+
+        // if(empty($data['email_prop'])){
+        //     echo json_encode(['success'=>false, 'message'=>'Email do Proprietário não encotrado']);
+        //     exit;
+        // }
+
+        // $email_prop = $data['email_prop'];
+
+        $email_prop = $_GET['email_prop'];
+
+        try{
+            $Mensagem = new Mensagem();
+            $UserMensagem = $Mensagem->Read($email_prop);
+
+            // Estou pegando apenas as mensagem enviaada do Proprietario
+            foreach($UserMensagem as $msg){
+                $resultado[] = $msg['msg_dstny'];
+
+                // echo json_encode($msg['email_dstny']);
+                // echo " ";
+            }
+
+            echo json_encode($resultado);
+
         }catch(PDOException $e){
             echo json_encode(['error'=> $e->getMessage()]);
         }

@@ -1,6 +1,6 @@
 <?php 
-    require 'conn.class.php';
-    require 'prop.class.php';
+    require './class/conn.class.php';
+    require './class/prop.class.php';
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         header('Content-Type: application/json');
@@ -65,7 +65,6 @@
         try{
             $user = new Proprietario();
             $DadosUpdate = $user->Update($email_update, $senha_update);
-            
 
             echo json_encode(['success'=>true, 'message'=>'Atualização com Sucesso']);
         }catch(PDOException $e){
