@@ -19,23 +19,26 @@ const Cadastro = () => {
 
     try{
       // Monta uma reuisição em JSON para o Pyhton
-      const URL = import.meta.env.VITE_URL_PY_CADASTRAR;
-      const requisicao = await fetch(URL, {
-        method: 'POST',
-        headers: {'content-type': 'application/json'},
-        body: JSON.stringify(data)
-      });
+        const URL = import.meta.env.VITE_URL_PHP_CADASTRAR;
+        const requisicao = await fetch(URL, {
+          method: 'POST',
+          headers: {'content-type': 'application/json'},
+          body: JSON.stringify(data)
+        });
+
+        // const texto = await requisicao.text();
+        // console.log("REPOSTA BRUTA DO PHP" , texto);
 
       //Validação de Envio da requsiçao
       const resultado = await requisicao.json();
       if(resultado.success){
         alert(resultado.message);
+        navegacao("/");
       } else{
         alert(resultado.message);
       }
     
       // Manda de volta para o Login
-      navegacao("/");
     } catch(e){
         console.error("Error", e);
     }

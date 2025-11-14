@@ -1,17 +1,31 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Mensagem = () => {
+    const navigate = useNavigate();
+
     const [email_dstny, setEmail_Dstny] = useState('');
     const [nome_dstny, setNome_Dstny] = useState('');
     const [msg_dstny, setMsg_Dstny] = useState('');
 
+    const location = useLocation();
+    const email_prop = location.state?.key;
+    // console.log(email_prop);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const data = {email_dstny, nome_dstny, msg_dstny}
+        const data = {
+            email_prop,
+            email_dstny, 
+            nome_dstny, 
+            msg_dstny
+        }
 
         try{
-            const URL = import.meta.env.VITE_PY_MSG;
+            // const URL = import.meta.env.VITE_PY_MSG;
+            const URL = import.meta.env.VITE_PHP_MSG;
             const requisicao = await fetch(URL, {
                 method: 'POST',
                 headers: {'content-type': 'application/json'},
@@ -21,6 +35,7 @@ const Mensagem = () => {
             const resultado = await requisicao.json();
             if(resultado.success){
                 alert(resultado.message);
+                navigate("/");
             } else{
                 alert(resultado.message);
             }

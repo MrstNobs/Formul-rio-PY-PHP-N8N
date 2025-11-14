@@ -1,6 +1,12 @@
 <?php 
+    require './class/config.php';
+    // if($_SERVER['REQUEST_METHOD'] === 'OPTIONS'){
+    //     http_response_code(200);
+    //     exit;
+    // }
     require './class/conn.class.php';
     require './class/prop.class.php';
+
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         header('Content-Type: application/json');
@@ -38,7 +44,7 @@
                     $DadoGetUser = $user->Read($email_login);
 
                     if($DadoGetUser && password_verify($senha_login, $DadoGetUser['senha'])){
-                        echo json_encode(['success'=>true, 'message'=>'Usuario Verificado']);
+                        echo json_encode(['success'=>true, 'message'=>'Usuario Verificado', 'email_hidden'=> $DadoGetUser['email']]);
                     } else{
                         echo json_encode(['success'=>false, 'message'=>'Senha ou Usuario Incorretos!']);
                         // echo "Incorretos Senha ou Email";
@@ -71,4 +77,5 @@
             echo json_encode(['error'=> $e->getMessage()]);
         }
     }
+
 ?>

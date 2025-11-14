@@ -21,7 +21,7 @@ const Login = () => {
 
     try{
       // Faz uma reqsuisiçaõ
-      const URL = import.meta.env.VITE_URL_PY_LOGIN;
+      const URL = import.meta.env.VITE_URL_PHP_LOGIN;
       const requisicao = await fetch(URL, {
         method: 'POST',
         headers: {'content-type': 'application/json'},
@@ -32,12 +32,14 @@ const Login = () => {
       const resultado = await requisicao.json();
       if(resultado.success){
         alert(resultado.message);
+
+        const email_hidden = resultado.email_hidden;
+        navegate("/mensagem", { state: { key: email_hidden}});
       } else{
         alert(resultado.message);
       }
 
       // Navega ata proxima págima Mensagem
-      navegate("/mensagem");
     }catch(e){
       console.error("Error", e);
     }
@@ -79,7 +81,6 @@ const Login = () => {
         <button type='submit' className='login'>Login</button>
 
         <div className='register-link'>
-          {/* Aqui que eu quero que o LINK funcioner */}
           <p>Não possui uma conta? <Link to='/cadastro'>Cadastrar</Link> </p>
         </div>
 

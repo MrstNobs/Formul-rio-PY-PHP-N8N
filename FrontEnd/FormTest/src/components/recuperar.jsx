@@ -13,7 +13,7 @@ const Recuperar = () => {
         const data = {email_update, senha_update};
 
         try{
-            const URL = import.meta.env.VITE_PY_UPDATE;
+            const URL = import.meta.env.VITE_PHP_UPDATE;
             const requisicao = await fetch(URL, {
                 method: 'PUT',
                 headers: {'content-type': 'application/json'},
@@ -23,11 +23,11 @@ const Recuperar = () => {
             const resultado = await requisicao.json();
             if(resultado.success){
                 alert(resultado.message);
+                navigate("/")
             } else{
                 alert(resultado.message);
             }
 
-            navigate("/")
         }catch(e){
             console.error("Error", e);
         }
