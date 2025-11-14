@@ -18,9 +18,9 @@ def EnviarMensagem():
 
     data = request.json
 
-    email_dstny = data.get('email_dstny')
-    nome_dstny = data.get('nome_dstny')
-    msg_dstny = data.get('msg_dstny')
+    email_dstny = data.get('email')
+    nome_dstny = data.get('nome')
+    msg_dstny = data.get('mensagem')
 
     payload = {
         'email':email_dstny,

@@ -17,9 +17,13 @@ CREATE TABLE Mensagens(
 
 ALTER TABLE Proprietario ADD PRIMAREY KEY (id);
 
-ALTER TABLE Mensagem ADD PRIMAREY KEY (id), ADD KEY email_prop (Proprietario)
+ALTER TABLE Mensagens ADD PRIMAREY KEY (id)
 
-ALTER TABLE Proprietario ADD AUTO_INCREMENT (id)
-ALTER TABLE Mensagens ADD AUTO_INCREMENT(id)
+ALTER TABLE Proprietario ADD KEY (email)
 
-ALTER TABLE Mensagem ADD CONSTRAINT FOREIGN KEY (email_prop) REFERENCES Proprietario (email)
+ALTER TABLE Mensagens ADD KEY (email_prop)
+
+ALTER TABLE Proprietario MODIFY COLUMN id INT(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE Mensagens MODIFY COLUMN id INT(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE mensagens ADD CONSTRAINT FOREIGN KEY (email_prop) REFERENCES proprietario (email)

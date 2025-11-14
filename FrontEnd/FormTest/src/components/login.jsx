@@ -56,8 +56,7 @@ const Login = () => {
             type='email'
             value={email_login}
             onChange={(e)=>setEmail_Login(e.target.value)}
-          >
-          </input>
+          />
           <i className='bx bxs-user'></i>
         </div>
 
@@ -67,7 +66,7 @@ const Login = () => {
             type='password'
             value={senha_login}
             onChange={(e)=>setSenha_Login(e.target.value)}
-            ></input>
+            />
           <i className='bx bxs-lock-alt'></i>
         </div>
 

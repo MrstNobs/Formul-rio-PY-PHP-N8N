@@ -57,8 +57,7 @@ const Mensagem = () => {
                         type='email'
                         value={email_dstny}
                         onChange={(e)=>setEmail_Dstny(e.target.value)}
-                    >
-                    </input>
+                    />
                 </div>
 
                 <div className='inputBox'>
@@ -66,7 +65,7 @@ const Mensagem = () => {
                         placeholder='Digite o nome da pessoa'
                         value={nome_dstny}
                         onChange={(e)=>setNome_Dstny(e.target.value)}
-                        ></input>
+                        />
                 </div>
 
                 <div className='inputBox'>
@@ -74,7 +73,7 @@ const Mensagem = () => {
                         placeholder='Digite sua mensagem'
                         value={msg_dstny}
                         onChange={(e)=>setMsg_Dstny(e.target.value)}
-                        ></input>
+                        />
                 </div>
 
 
