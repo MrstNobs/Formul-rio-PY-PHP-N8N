@@ -1,15 +1,19 @@
-// import { useState } from 'react';
+// Importa as Bibliotecas State, Link e Navegação
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  // Pega a função da importação
   const navegate = useNavigate();
 
+  // Salva as informações
   const [email_login, setEmail_Login] = useState('');
   const [senha_login, setSenha_Login] = useState('');
 
+  // Cria uma função
   const EnviarLogin = async (e) => {
+    // Não recarrega a página
     e.preventDefault();
 
     // Cria um Objeto
@@ -28,18 +32,18 @@ const Login = () => {
         body: JSON.stringify(data)
       });
 
-      // faz validação da resuqisação
+      // faz validação da resuqisação e mostra na tela
       const resultado = await requisicao.json();
       if(resultado.success){
         alert(resultado.message);
 
+        // Manda uma informação e navega para a outra página
         const email_hidden = resultado.email_hidden;
         navegate("/mensagem", { state: { key: email_hidden}});
       } else{
         alert(resultado.message);
       }
 
-      // Navega ata proxima págima Mensagem
     }catch(e){
       console.error("Error", e);
     }
@@ -88,4 +92,5 @@ const Login = () => {
   )
 }
 
+// Exporta o arquivo
 export default Login;

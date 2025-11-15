@@ -1,16 +1,21 @@
+// Importa bibliotecas State e Navegação
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Cadastro = () => {
-  // Função de Navegaação
+  // Pega a função da importação
   const navegacao = useNavigate();
 
+  // Salva as informações
   const [email_cadastro, setEmail_Cadastro] = useState('');
   const [senha_cadastro, setSenha_Cadastro] = useState('');
 
+  // Cria uma função
   const handleSubmit = async (e) => {
+    // Nãp recarrega a página
     e.preventDefault();
 
+    // Cria um Objeto
     const data = {
       action:'cadastro',
       email_cadastro, 
@@ -18,18 +23,15 @@ const Cadastro = () => {
     };
 
     try{
-      // Monta uma reuisição em JSON para o Pyhton
-        const URL = import.meta.env.VITE_URL_PHP_CADASTRAR;
-        const requisicao = await fetch(URL, {
-          method: 'POST',
-          headers: {'content-type': 'application/json'},
-          body: JSON.stringify(data)
-        });
+      // Faz um requisição
+      const URL = import.meta.env.VITE_URL_PHP_CADASTRAR;
+      const requisicao = await fetch(URL, {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(data)
+      });
 
-        // const texto = await requisicao.text();
-        // console.log("REPOSTA BRUTA DO PHP" , texto);
-
-      //Validação de Envio da requsiçao
+      // Valida a requisição, mostra na tela e nevega para outra página
       const resultado = await requisicao.json();
       if(resultado.success){
         alert(resultado.message);
@@ -38,7 +40,6 @@ const Cadastro = () => {
         alert(resultado.message);
       }
     
-      // Manda de volta para o Login
     } catch(e){
         console.error("Error", e);
     }
@@ -76,4 +77,6 @@ const Cadastro = () => {
     </div>
   );
 }
+
+// Exporta o arquivo 
 export default Cadastro;

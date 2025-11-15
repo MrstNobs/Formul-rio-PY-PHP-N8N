@@ -1,21 +1,27 @@
+// Importa Biblioteca State Locação e Navegação
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Mensagem = () => {
+    // Pega a função da importação
     const navigate = useNavigate();
 
+    // Salva as informações
     const [email_dstny, setEmail_Dstny] = useState('');
     const [nome_dstny, setNome_Dstny] = useState('');
     const [msg_dstny, setMsg_Dstny] = useState('');
 
+    // Pega a função da importação e depois pega a informações
     const location = useLocation();
     const email_prop = location.state?.key;
-    // console.log(email_prop);
 
+    // Cria uma função
     const handleSubmit = async (e) => {
+        // Não recarrega a página
         e.preventDefault();
 
+        // Cria um objeto
         const data = {
             email_prop,
             email_dstny, 
@@ -24,7 +30,7 @@ const Mensagem = () => {
         }
 
         try{
-            // const URL = import.meta.env.VITE_PY_MSG;
+            // Faz a requisição
             const URL = import.meta.env.VITE_PHP_MSG;
             const requisicao = await fetch(URL, {
                 method: 'POST',
@@ -32,6 +38,7 @@ const Mensagem = () => {
                 body: JSON.stringify(data)
             });
 
+            // Faz a validação da requisição e mostra na tela e faz a nevegação para outra página
             const resultado = await requisicao.json();
             if(resultado.success){
                 alert(resultado.message);
@@ -44,7 +51,6 @@ const Mensagem = () => {
             console.error("Error", e);
         }
     };
-
 
     return (
         <div className='container-main'>
@@ -76,7 +82,6 @@ const Mensagem = () => {
                         />
                 </div>
 
-
                 <button type='submit' className='login'>Enviar</button>
 
         </form>
@@ -84,4 +89,5 @@ const Mensagem = () => {
     );
 };
 
+// Exporta o arquivo
 export default Mensagem;
